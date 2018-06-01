@@ -1,26 +1,54 @@
 var wins = 0;
 var losses = 0;
-var numberofTries = 0;
-var guessesMade = 0;
+var triesLeft = 9;
+var guessesMade = [];
+var result = 0;
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+document.getElementById("wins").innerHTML = wins;
+document.getElementById("losses").innerHTML = losses;
+document.getElementById("triesLeft").innerHTML = triesLeft;
 
-var computerLetter = alphabet[Math.floor(Math.random()*alphabet.length)];
+var computerLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+console.log(computerLetter);
 
-document.onkeyup = function(event) {
-    
+document.onkeyup = function userGuess(event) {
+
     var userGuess = event.key;
+    for (var i = 0; i < guessesMade.length; i++) {
+        if (userGuess === guessesMade[i].slice(1)) {
+            alert("You made that guess already.")
+            return;
+        }
+    }
 
-    if(userGuess === computerLetter) {
-        numberofTries++;
+    if (userGuess === computerLetter) {
+        triesLeft--;
+        document.getElementById("triesLeft").innerHTML = triesLeft;
         wins++;
-        prompt("Congratulations! You guessed the letter, " + computerLetter + "." + " It took you " + numberofTries + " tries.");
-    } else if(userGuess === guessesMade) {
-        prompt("You made that guess already.");
+        document.getElementById("wins").innerHTML = wins;
+        result = 1;
+        alert("Congratulations! You guessed the letter, " + computerLetter + "." + " It took you " + (9 - triesLeft) + " tries.");
     } else {
-        numberofTries++;
-        guessesMade.push[userGuess];
+        triesLeft--;
+        document.getElementById("triesLeft").innerHTML = triesLeft;
+        guessesMade.push(" " + userGuess);
+        document.getElementById("guessesMade").innerHTML = guessesMade;
+    }
+
+    if (triesLeft === 0) {
+        losses++;
+        document.getElementById("losses").innerHTML = losses;
+        result = 1;
+    }
+
+    if (result === 1) {
+        computerLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+        console.log(computerLetter);
+        triesLeft = 9;
+        document.getElementById("triesLeft").innerHTML = triesLeft;
+        guessesMade = [];
+        document.getElementById("guessesMade").innerHTML = guessesMade;
+        result = 0;
     }
 }
-
-// /^[a-z]+$/
