@@ -1,23 +1,23 @@
-var wins = 0;
-var losses = 0;
-var triesLeft = 9;
-var guessesMade = [];
-var result = 0;
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var wins = 0, 
+    losses = 0, 
+    triesLeft = 9,
+    guessesMade = [],
+    result = 0,
+    alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+    computerLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
 
 document.getElementById("wins").innerHTML = wins;
 document.getElementById("losses").innerHTML = losses;
 document.getElementById("triesLeft").innerHTML = triesLeft;
 
-var computerLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
 console.log(computerLetter);
 
-document.onkeyup = function userGuess(event) {
+document.onkeyup = function userGuess() {
 
     var userGuess = event.key;
     for (var i = 0; i < guessesMade.length; i++) {
         if (userGuess === guessesMade[i].slice(1)) {
-            alert("You made that guess already.")
+            alert("You made that guess already.");
             return;
         }
     }
