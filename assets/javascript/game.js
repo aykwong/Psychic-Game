@@ -12,7 +12,7 @@ document.getElementById("triesLeft").innerHTML = triesLeft;
 
 console.log(computerLetter);
 
-document.onkeyup = function userGuess() {
+document.onkeyup = function userGuess(event) {
 
     var userGuess = event.key;
     for (var i = 0; i < guessesMade.length; i++) {
